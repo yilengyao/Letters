@@ -4,16 +4,29 @@ import PropTypes from 'prop-types';
 
 const node = document.getElementById('root');
 
-function Greeting(props) {
-  return <div>Hello {props.for}!</div>
+const UserProfile = props => {
+  return <img src={`http://source.unsplash.com/user/${props.username}`} />;
 };
 
-Greeting.propTypes = {
-  for: PropTypes.string.isRequired
+UserProfile.propTypes = {
+  pagename: PropTypes.string
 };
 
-Greeting.defaultProps = {
-  for: "friend"
+UserProfile.defaultProps = {
+  pagename: "erondu"
 };
 
-ReactDOM.createRoot(node).render(<Greeting for="Mark" />);
+const UserProfileLink = props => {
+  return <a href={`https://ifelse.io/${props.username}`}>{props.username}</a>;
+};
+
+const UserCard = props => {
+  return (
+    <div>
+      <UserProfileLink username={props.username} />
+      <UserProfile username={props.username} />
+    </div>
+  );
+};
+
+ReactDOM.createRoot(node).render(<UserCard username="erondu" />);
